@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <style>
+        hr.tsep { border-top: 1px solid green; }
+        hr.msep { border-top: 1px gray; }
+        .sm-col{ width: 15%; }
+        .lg-col{ width: 35%; }
+        .full-size{ width: 100%; }
+    </style>
+</head>
+ 
+<body>
+    <div class="container">
+        <img src="cid:logo" alt="Stori" width="100px">
+        <hr class="tsep">
+
+        <p><b>Hi! Here is your account report</b></p>
+
+        <hr class="msep">
+
+        <table class="full-size">
+            <colgroup>
+                <col span="1" class="sm-col">
+                <col span="1" class="lg-col">
+                <col span="1" class="sm-col">
+                <col span="1" class="lg-col">
+            </colgroup>
+            
+            <tbody>
+                <tr>
+                    <td><b>Total balance:</b></td><td>{{ total_balance }}</td>
+                    <td><b>Average debit amount:</b></td><td>{{ average_debit }}</td>
+                </tr>
+
+                <tr>
+                    <td></td><td></td>
+                    <td><b>Average credit amount:</b></td><td>{{ average_credit }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr class="msep">
+
+        <table class="full-size">
+            <colgroup>
+                <col span="1" class="lg-col">
+                <col span="1" class="lg-col">
+            </colgroup>
+            
+            <tbody>
+                {% for t in transactions_month %}
+                <tr>
+                    <td><b>Number of transactions in {{ t.month }}:</b></td><td>{{ t.count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>        
+    </div>
+</body>
+ 
+</html>
+
