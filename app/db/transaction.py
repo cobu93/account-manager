@@ -9,10 +9,10 @@ import pandas as pd
 
 import os
 
-from src.utils import file as file_utils
-from src.utils import date as date_utils
+from app.utils import file as file_utils
+from app.utils import date as date_utils
 
-import src.schemas as schemas
+import app.schemas as schemas
 
 from .base import Base
 

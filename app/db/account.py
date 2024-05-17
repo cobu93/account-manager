@@ -9,7 +9,7 @@ from .base import Base
 from .transaction import Transaction
 from ..conn import db
 
-import src.schemas as schemas
+import app.schemas as schemas
 
 class Account(Base):
 

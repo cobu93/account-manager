@@ -9,8 +9,8 @@ services:
       required: true
     ports:
       - "80:8000"
-    volumes: 
-      - ./src:/code
+    #volumes: 
+    #  - ./app:/code/app
     depends_on:
       - localstack
 
@@ -42,6 +42,7 @@ services:
     volumes:
       - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
+      - ".:/opt/code/localstack/account-manager"
       # Post-starting scripts
       - ./start-localstack.sh:/etc/localstack/init/ready.d/start-localstack.sh
 

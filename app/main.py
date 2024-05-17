@@ -1,7 +1,7 @@
 from typing import List, Union
 from fastapi import FastAPI, Depends, UploadFile
 from sqlalchemy.orm import Session
-import src.schemas as schemas
+import app.schemas as schemas
 from .conn import aws, db
 
 from .db import Account, Transaction
