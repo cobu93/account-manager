@@ -9,10 +9,9 @@ import pandas as pd
 
 import os
 
-import utils.file
-import utils.date
+import src.utils as utils
 
-import schemas
+import src.schemas as schemas
 
 from .base import Base
 

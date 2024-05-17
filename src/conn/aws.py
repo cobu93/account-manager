@@ -1,4 +1,4 @@
-from config import S3_ACCESS_KEY, S3_SECRET_KEY, BOTO3_ENDPOINT
+from ..config import S3_ACCESS_KEY, S3_SECRET_KEY, BOTO3_ENDPOINT
 from boto3.session import Session
 
 

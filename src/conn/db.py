@@ -2,7 +2,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from sqlalchemy import URL
-from config import DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT
+from ..config import DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT
 
 
 service_url = URL.create(

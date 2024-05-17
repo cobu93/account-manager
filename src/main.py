@@ -1,13 +1,12 @@
 from typing import List, Union
 from fastapi import FastAPI, Depends, UploadFile
 from sqlalchemy.orm import Session
-import schemas
-from conn import aws, db
+import src.schemas as schemas
+from .conn import aws, db
 
-from db import Account, Transaction
+from .db import Account, Transaction
 
-import utils.file
-import utils.report
+import src.utils as utils
 
 import os
 

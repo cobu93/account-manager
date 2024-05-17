@@ -7,9 +7,9 @@ from sqlalchemy.orm import Session
 
 from .base import Base
 from .transaction import Transaction
-from conn import db
+from ..conn import db
 
-import schemas
+import src.schemas as schemas
 
 class Account(Base):
 
