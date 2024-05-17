@@ -1,0 +1,47 @@
+services:
+  web:
+    container_name: web
+    build: 
+      context: .
+      dockerfile: web.dockerfile
+    env_file:
+    - path: ./.env
+      required: true
+    ports:
+      - "80:8000"
+    volumes: 
+      - ./src:/code
+    depends_on:
+      - localstack
+
+  db:
+    image: mysql
+    container_name: db
+    restart: always
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_HOST: ${DB_HOST}
+      MYSQL_PORT: ${DB_PORT}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_MY_DATABASE: ${DB_NAME}
+    ports:
+      - "3306:3306"
+      - "33060:33060"
+    volumes: 
+      - ./account_manager.sql:/docker-entrypoint-initdb.d/account_manager.sql
+
+  localstack:
+    container_name: localstack
+    image: localstack/localstack
+    ports:
+      - "127.0.0.1:4566:4566"            # LocalStack Gateway
+      - "127.0.0.1:4510-4559:4510-4559"  # external services port range
+    environment:
+      - DEBUG=${DEBUG:-0}
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      # Post-starting scripts
+      - ./start-localstack.sh:/etc/localstack/init/ready.d/start-localstack.sh
+

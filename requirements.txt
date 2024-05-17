@@ -1,0 +1,9 @@
+fastapi
+pydantic
+uvicorn
+sqlalchemy
+pymysql
+cryptography
+boto3
+pandas
+Jinja2
