@@ -1,7 +1,8 @@
 from pydantic import BaseModel
+from pydantic import EmailStr, Field
 
 class AccountBase(BaseModel):
-    email: str
+    email: EmailStr
 
 class CreateAccount(AccountBase):
     pass
