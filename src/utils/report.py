@@ -1,4 +1,4 @@
-from db import Transaction
+from src.db import Transaction
 from typing import List
 import pandas as pd
 from .email import send_email
@@ -8,7 +8,7 @@ import numpy as np
 
 from collections import namedtuple
 
-from config import (REPORT_SUBJECT,
+from src.config import (REPORT_SUBJECT,
                     REPORT_BODY_TEMPLATE,
                     REPORT_SMTP_SERVER,
                     REPORT_SMTP_PORT,
@@ -71,7 +71,7 @@ def build_report(transactions: Transaction):
 def send_report(
         email: str, 
         transactions: List[Transaction], 
-        logo: str = "assets/logo.jpg"
+        logo: str = "src/assets/logo.jpg"
     ):
 
     """

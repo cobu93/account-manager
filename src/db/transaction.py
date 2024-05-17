@@ -9,7 +9,8 @@ import pandas as pd
 
 import os
 
-import src.utils as utils
+from src.utils import file as file_utils
+from src.utils import date as date_utils
 
 import src.schemas as schemas
 
@@ -31,7 +32,7 @@ class Transaction(Base):
         try:
             stream = tempfile.SpooledTemporaryFile()
 
-            utils.file.download_obj_from_s3(
+            file_utils.download_obj_from_s3(
                 file.bucket, 
                 os.path.join(file.path, file.file_name), 
                 stream, 
@@ -42,7 +43,7 @@ class Transaction(Base):
             # Required to be parsed by pandas as a CSV
             stream._file.seek(0)
             df = pd.read_csv(stream._file)
-            df["Date"] = df["Date"].apply(utils.date.parse_file_date)
+            df["Date"] = df["Date"].apply(date_utils.parse_file_date)
 
             transactions = []
             for t in df.iloc:

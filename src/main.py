@@ -6,7 +6,9 @@ from .conn import aws, db
 
 from .db import Account, Transaction
 
-import src.utils as utils
+from .utils import file as file_utils
+from .utils import report as report_utils
+
 
 import os
 
@@ -45,7 +47,7 @@ def upload_transactions(file: UploadFile, s3_cli = Depends(aws.get_s3_client)):
     - *path*: "."
     - *file_name*: The same name as the file uploaded
     """
-    return utils.file.upload_obj_to_s3(
+    return file_utils.upload_obj_to_s3(
                 "account-manager",
                 os.path.join(".", file.filename),
                 file.file,
@@ -73,7 +75,7 @@ def send_report_account(id: int, db_sess: Session = Depends(db.get_session)):
     if not acc:
         return dict(message="Account not found", code=-1)
     
-    return utils.report.send_report(acc.email, acc.transactions)
+    return report_utils.send_report(acc.email, acc.transactions)
 
         
     
