@@ -4,6 +4,7 @@ import pandas as pd
 from .email import send_email
 from jinja2 import Template
 import base64
+import numpy as np
 
 from collections import namedtuple
 
@@ -49,9 +50,9 @@ def build_report(transactions: Transaction):
     report_df = pd.DataFrame(data)
     report_df["date"] = pd.to_datetime(report_df["date"])
 
-    total_balance = report_df["amount"].sum()
-    average_credit = report_df.query("amount > 0")["amount"].mean()
-    average_debit = report_df.query("amount < 0")["amount"].mean()
+    total_balance = np.round(report_df["amount"].sum(), decimals=2)
+    average_credit = np.round(report_df.query("amount > 0")["amount"].mean(), decimals=2)
+    average_debit = np.round(report_df.query("amount < 0")["amount"].mean(), decimals=2)
     transactions_month = report_df.groupby(pd.Grouper(key="date", freq="ME")).count().reset_index()
 
     report = ReportInformation(total_balance, average_credit, average_debit, [])
