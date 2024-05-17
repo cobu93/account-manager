@@ -43,6 +43,9 @@ def build_report(transactions: Transaction):
             "amount": t.amount,
         })
 
+    if len(data) <= 0:
+        return None
+    
     report_df = pd.DataFrame(data)
     report_df["date"] = pd.to_datetime(report_df["date"])
 
@@ -74,8 +77,10 @@ def send_report(
     Send the transactions report via email.
     """
     
-
     report = build_report(transactions)
+
+    if not report:
+        return dict(message="Nothing to be send", code=-3)
 
     # Read the predefined template and formats it
     with open(REPORT_BODY_TEMPLATE, "r") as f:

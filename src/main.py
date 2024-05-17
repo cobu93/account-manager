@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 from fastapi import FastAPI, Depends, UploadFile
 from sqlalchemy.orm import Session
 import schemas
@@ -21,12 +21,12 @@ def list_accounts(db_sess: Session = Depends(db.get_session)):
     """
     return Account.list(db_sess)
 
-@app.get("/account/{id}", response_model=schemas.Account)
+@app.get("/account/{id}", response_model=Union[schemas.Account, schemas.GenericResponse])
 def get_account(id: int, db_sess: Session = Depends(db.get_session)):
     """
     Get the account information related to the specified id.
     """
-    return Account.get(id, db_sess)
+    return Account.get(id, db_sess) or dict(message="Account not found", code=-1)
 
 @app.post("/account", response_model=schemas.Account)
 def create_account(account: schemas.CreateAccount, db_sess: Session = Depends(db.get_session)):
@@ -71,6 +71,9 @@ def send_report_account(id: int, db_sess: Session = Depends(db.get_session)):
     The summary is then sent to the email associated to the account.
     """
     acc = Account.get(id, db_sess)
+    if not acc:
+        return dict(message="Account not found", code=-1)
+    
     return utils.report.send_report(acc.email, acc.transactions)
 
         
