@@ -39,6 +39,8 @@ class Transaction(Base):
                 s3_cli
             )
 
+            # Return the S3 object to the start
+            # Required to be parsed by pandas as a CSV
             stream._file.seek(0)
             df = pd.read_csv(stream._file)
             df["Date"] = df["Date"].apply(utils.date.parse_file_date)
@@ -54,7 +56,7 @@ class Transaction(Base):
                     )
                 )
 
-            
+            # Bulk objects in database (more efficient)
             db_sess.bulk_save_objects(transactions)
             db_sess.commit()
             stream.close()

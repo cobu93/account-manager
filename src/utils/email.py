@@ -15,6 +15,9 @@ def send_email(
         logo: str
     ):
 
+    """
+    Builds the request for sending an email.
+    """
 
     msg = MIMEMultipart()
     msg["Subject"] = subject
@@ -22,6 +25,7 @@ def send_email(
     msg["To"] = ",".join(recipients)
     msg.attach(MIMEText(body, "html"))
     
+    # Attach a logo in the mail
     if logo:
         with open(logo, "rb") as f:
             logo_img = MIMEImage(f.read())

@@ -30,6 +30,10 @@ MonthlyTransactions = namedtuple(
                     ])
 
 def build_report(transactions: Transaction):
+    """
+    Extract the report information depending on the transactions.
+    """
+
     data = []
 
     for t in transactions:
@@ -66,8 +70,14 @@ def send_report(
         logo: str = "assets/logo.jpg"
     ):
 
+    """
+    Send the transactions report via email.
+    """
+    
+
     report = build_report(transactions)
 
+    # Read the predefined template and formats it
     with open(REPORT_BODY_TEMPLATE, "r") as f:
         template = Template(f.read())
 
