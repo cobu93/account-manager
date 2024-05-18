@@ -2,3 +2,6 @@
 __pycache__
 volume
 package
+aws-setup.sh
+functions.zip
+output.txt
