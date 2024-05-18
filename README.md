@@ -44,7 +44,7 @@ Additionally, an application password will be required to send reports from you 
 
 ### Environment variables
 
-If everything has gone smooth, the next step is to fill the information in the `.env` file created before. It must contain the following variaables:
+If everything has gone smooth, the next step is to fill the information in the `.env` file created before. It must contain the following variables:
 
 ``` python
 # Database information
@@ -91,16 +91,27 @@ If everything was right, by accessing to `http://localhost/docs` you will see a 
 
 ![Swagger](assets/swagger.png "Account manager swagger")
 
-It is an instance of Swagger, an API documentation tool, included with FastAPI. It allows to test the deployed endpoints in the account manager application.
+It is an instance of Swagger, an API documentation tool, included with FastAPI. It allows to test the deployed endpoints in the account manager API.
 
 ## Account manager API
+
+There exists six endpoints in the account manager API. Each one of them is intended to perform (almost) atomic operations. They are:
+
+- **/accounts**: List all existing accounts.
+- **/account/{id}**: Retrieves the information of the account associated to {id}.
+- **/account**: Creates a new account.
+- **/transactions/upload**: Upload a transactions file to a S3 bucket.
+- **/account/{id}/transactions/save-file**: Save to a database the information of an uploaded transactions file and associates the transactions with the account related to the id {id}.
+- **/account/{id}/send-report**: Send the transactions summary (report) to the email associated to the account {id}.
+
 ## Testing online
 
+For an online testing an AWS Lambda function including the aforementioned development is available. Nevertheless its functionality is limited. 
 
+Due to the privacy of the personal email information, the /account/{id}/send-report endpoint is not working, so, you will not be able to send the report via email. On the other hand, if you are testing locally, it will works fine. The report will looks like the image below.
 
+![Report](assets/report.png "Report example")
 
+Additionally, the response time limit is of 20 seconds, so, if you try to test the endpoints requiring uploading or downloading files from the S3 bucket, it might fail. Maybe you should try again, it may  works, but it is not completely ensured.
 
-
-
-
-
+**The access to the AWS Lambda is provided under request**.
