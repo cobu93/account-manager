@@ -4,7 +4,7 @@
 pip install awscli-local[ver1] 
 
 # Setup AWS S3
-awslocal s3api create-bucket --bucket account-manager
+awslocal s3api create-bucket --bucket account-manager-test
 
 cat > /tmp/cors-config.json << EOL
 {
@@ -21,7 +21,7 @@ EOL
 
 cat /tmp/cors-config.json
 
-awslocal s3api put-bucket-cors --bucket account-manager --cors-configuration file:///tmp/cors-config.json
+awslocal s3api put-bucket-cors --bucket account-manager-test --cors-configuration file:///tmp/cors-config.json
 
 # Create a user
 awslocal iam create-user --user-name accmgr

@@ -43,12 +43,12 @@ def upload_transactions(file: UploadFile, s3_cli = Depends(aws.get_s3_client)):
     Upload a transactions file to a S3 default bucket. 
     
     The S3 default bucket is given by:
-    - *bucket*: "account-manager"
+    - *bucket*: "account-manager-test"
     - *path*: "."
     - *file_name*: The same name as the file uploaded
     """
     return file_utils.upload_obj_to_s3(
-                "account-manager",
+                "account-manager-test",
                 os.path.join(".", file.filename),
                 file.file,
                 s3_cli

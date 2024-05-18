@@ -5,4 +5,4 @@ class FileDescription(BaseModel):
     file_name: str = "transactions.csv"
 
 class S3FileDescription(FileDescription):
-    bucket: str = "account-manager"
+    bucket: str = "account-manager-test"
