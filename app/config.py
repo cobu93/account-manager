@@ -6,8 +6,8 @@ DB_PASSWORD = os.environ["DB_PASSWORD"]
 DB_HOST = os.environ["DB_HOST"]
 DB_PORT = os.environ["DB_PORT"]
 
-S3_ACCESS_KEY = os.environ["S3_ACCESS_KEY"]
-S3_SECRET_KEY = os.environ["S3_SECRET_KEY"]
+S3_ACCESS_KEY = os.environ.get("S3_ACCESS_KEY", None)
+S3_SECRET_KEY = os.environ.get("S3_SECRET_KEY", None)
 BOTO3_ENDPOINT = os.environ.get("BOTO3_ENDPOINT", None)
 
 REPORT_SUBJECT = "Your account report!"
