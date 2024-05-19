@@ -104,6 +104,16 @@ There exists six endpoints in the account manager API. Each one of them is inten
 - **/account/{id}/transactions/save-file**: Save to a database the information of an uploaded transactions file and associates the transactions with the account related to the id {id}.
 - **/account/{id}/send-report**: Send the transactions summary (report) to the email associated to the account {id}.
 
+### Code structure
+
+The whole application is contained in the **app** folder. The starting reading point is the **main.py** file where the deployed endpoints are implemented. There are five folders too, containing the remaining of the project. These folders contain:
+
+- **assets**: Contains the report template.
+- **conn**: Here you can find the database and AWS connections establishment.
+- **db**: Contains the operations requiring database access. The operations are grouped accordingly to the business impact, whether the accounts or the transactions.
+- **schemas**: This folder has the objects that FastAPI (pydantic) will use to validate the structure of the API request and responses.
+- **utils**: This folder contains generic functions, unrelated to the business logic and which could be reutilized in another project.
+
 ## Testing online
 
 For an online testing an AWS Lambda function including the aforementioned development is available. Nevertheless its functionality is limited. 
